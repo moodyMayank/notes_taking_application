@@ -1,4 +1,4 @@
-import SwipeDrawer from "../components/SwipeDrawer";
+import SwipeDrawer from "../Components/SwipeDrawer";
 
 const Home = () => {
   return (

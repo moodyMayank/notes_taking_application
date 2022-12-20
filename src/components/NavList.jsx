@@ -1,17 +1,41 @@
 import * as React from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 const NavList = ({ open }) => {
+  const navList = [
+    {
+      id: 1,
+      name: "Notes",
+      icon: <LightbulbOutlinedIcon color="primary" />,
+    },
+    {
+      id: 2,
+      name: "Starred",
+      icon: <StarOutlineOutlinedIcon color="primary" />,
+    },
+    {
+      id: 3,
+      name: "Archived",
+      icon: <ArchiveOutlinedIcon color="primary" />,
+    },
+    {
+      id: 4,
+      name: "Trash",
+      icon: <DeleteOutlinedIcon color="primary" />,
+    },
+  ];
   return (
     <List>
-      {["Notes", "Starred", "Archived", "Trash"].map((text, index) => (
-        <ListItem key={text} disablePadding sx={{ display: "block" }}>
+      {navList.map((list) => (
+        <ListItem key={list.id} disablePadding sx={{ display: "block" }}>
           <ListItemButton
             sx={{
               minHeight: 48,
@@ -26,9 +50,9 @@ const NavList = ({ open }) => {
                 justifyContent: "center",
               }}
             >
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {list.icon}
             </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemText primary={list.name} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
         </ListItem>
       ))}
