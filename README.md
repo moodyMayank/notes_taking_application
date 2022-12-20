@@ -12,5 +12,3 @@
 - Date Created / Modified
 - Delete Option
 - Coloring Option of the Note
-
-2.

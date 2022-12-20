@@ -1,8 +1,8 @@
-import NotesList from "./components/NotesList";
+import Home from "./Pages/Home";
 function App() {
   return (
     <div>
-      <NotesList />
+      <Home />
     </div>
   );
 }
