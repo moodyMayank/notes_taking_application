@@ -1,7 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
 import { Box, TextField, ClickAwayListener } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { v4 as uuid } from "uuid";
+
+import { DataContext } from "../../context/DataProvider";
 
 const Container = styled(Box)`
   display: flex;
@@ -12,22 +15,44 @@ const Container = styled(Box)`
   padding: 10px 15px;
   border-radius: 8px;
   border-color: #e0e0e0;
+  min-height: 30px;
 `;
+
+const note = {
+  id: "",
+  heading: "",
+  text: "",
+};
 
 const Form = () => {
   const [showTextField, setShowTextField] = useState(false);
+  const [addNote, setAddNote] = useState({ ...note, id: uuid() }); // This is for newly note being added by user {Single Note}
+  const { setNotes } = useContext(DataContext); // All the newly notes will added here finally { Array of Notes}
+
+  const containerRef = useRef();
 
   const onTextAreaClick = () => {
     setShowTextField(true);
+    containerRef.current.style.minHeight = "70px";
   };
 
   const handleClickAway = () => {
     setShowTextField(false);
+    containerRef.current.style.minHeight = "30px";
+    setAddNote({ ...note, id: uuid() });
+    // Pushing the Note to NotesList
+    if (addNote.heading || addNote.text)
+      setNotes((prevArr) => [addNote, ...prevArr]); // Push as a object
+  };
+
+  const onTextChange = (e) => {
+    let changedNote = { ...addNote, [e.target.name]: e.target.value };
+    setAddNote(changedNote);
   };
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Container>
+      <Container ref={containerRef}>
         {showTextField && (
           <TextField
             label="Title"
@@ -35,6 +60,9 @@ const Form = () => {
             variant="standard"
             InputProps={{ disableUnderline: true }}
             style={{ marginBottom: 10 }}
+            onChange={(e) => onTextChange(e)}
+            name="heading"
+            value={addNote.heading}
           />
         )}
         <TextField
@@ -44,6 +72,9 @@ const Form = () => {
           variant="standard"
           InputProps={{ disableUnderline: true }}
           onClick={onTextAreaClick}
+          onChange={(e) => onTextChange(e)}
+          name="text"
+          value={addNote.text}
         />
       </Container>
     </ClickAwayListener>

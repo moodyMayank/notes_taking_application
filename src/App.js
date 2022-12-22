@@ -1,9 +1,11 @@
 import Home from "./Pages/Home";
+import DataProvider from "./context/DataProvider";
+
 function App() {
   return (
-    <div>
+    <DataProvider>
       <Home />
-    </div>
+    </DataProvider>
   );
 }
 
