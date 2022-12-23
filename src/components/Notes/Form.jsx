@@ -55,7 +55,7 @@ const Form = () => {
       <Container ref={containerRef}>
         {showTextField && (
           <TextField
-            label="Title"
+            placeholder="Title"
             color="primary"
             variant="standard"
             InputProps={{ disableUnderline: true }}

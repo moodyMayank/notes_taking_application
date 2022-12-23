@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { Box, Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+import { Box, Grid, styled } from "@mui/material";
 
 // Components
-import Form from "./Form";
-import Note from "./Note";
+import Archive from "./Archive";
 import EmptyNotes from "../EmptyNotes";
+
+// Icons
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 
 import { DataContext } from "../../context/DataProvider";
 
@@ -16,18 +16,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 // Using Key here to avoid the Warning in the React Code
-const Notes = () => {
-  const { notes } = useContext(DataContext);
+const Archives = () => {
+  const { archiveNotes } = useContext(DataContext);
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
-      <Form />
-      {notes.length > 0 ? (
+      {archiveNotes.length > 0 ? (
         <Grid container style={{ marginTop: "16px" }}>
-          {notes.map((note) => {
+          {archiveNotes.map((note) => {
             return (
               <Grid item key={note.id}>
-                <Note note={note} />
+                <Archive note={note} />
               </Grid>
             );
           })}
@@ -35,15 +34,15 @@ const Notes = () => {
       ) : (
         <EmptyNotes
           Image={
-            <LightbulbOutlinedIcon
+            <UnarchiveOutlinedIcon
               style={{ fontSize: "120px", color: "#f5f5f5" }}
             />
           }
-          displayText={"Notes are Displayed here"}
+          displayText={"Arhive Notes are here"}
         />
       )}
     </Box>
   );
 };
 
-export default Notes;
+export default Archives;

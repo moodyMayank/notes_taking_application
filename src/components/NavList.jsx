@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
@@ -14,45 +15,57 @@ const NavList = ({ open }) => {
       id: 1,
       name: "Notes",
       icon: <LightbulbOutlinedIcon color="primary" />,
+      route: "/",
     },
     {
       id: 2,
       name: "Starred",
       icon: <StarOutlineOutlinedIcon color="primary" />,
+      route: "/starred",
     },
     {
       id: 3,
       name: "Archived",
       icon: <ArchiveOutlinedIcon color="primary" />,
+      route: "/archived",
     },
     {
       id: 4,
       name: "Trash",
       icon: <DeleteOutlinedIcon color="primary" />,
+      route: "/trashed",
     },
   ];
   return (
     <List>
       {navList.map((list) => (
         <ListItem key={list.id} disablePadding sx={{ display: "block" }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? "initial" : "center",
-              px: 2.5,
-            }}
+          <Link
+            to={list.route}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
-            <ListItemIcon
+            <ListItemButton
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : "auto",
-                justifyContent: "center",
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
               }}
             >
-              {list.icon}
-            </ListItemIcon>
-            <ListItemText primary={list.name} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                {list.icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={list.name}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </Link>
         </ListItem>
       ))}
     </List>

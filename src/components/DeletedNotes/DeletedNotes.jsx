@@ -1,13 +1,9 @@
 import { useContext } from "react";
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 
 // Components
-import Form from "./Form";
-import Note from "./Note";
-import EmptyNotes from "../EmptyNotes";
-
+import DeletedNote from "./DeleteNote";
 import { DataContext } from "../../context/DataProvider";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -16,34 +12,26 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 // Using Key here to avoid the Warning in the React Code
-const Notes = () => {
+const DeletedNotes = () => {
   const { notes } = useContext(DataContext);
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
-      <Form />
       {notes.length > 0 ? (
         <Grid container style={{ marginTop: "16px" }}>
           {notes.map((note) => {
             return (
               <Grid item key={note.id}>
-                <Note note={note} />
+                <DeletedNote note={note} />
               </Grid>
             );
           })}
         </Grid>
       ) : (
-        <EmptyNotes
-          Image={
-            <LightbulbOutlinedIcon
-              style={{ fontSize: "120px", color: "#f5f5f5" }}
-            />
-          }
-          displayText={"Notes are Displayed here"}
-        />
+        <div>Empty</div>
       )}
     </Box>
   );
 };
 
-export default Notes;
+export default DeletedNotes;

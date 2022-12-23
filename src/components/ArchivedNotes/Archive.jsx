@@ -17,7 +17,7 @@ const StyledCard = styled(Card)`
   border-radius: 8px;
 `;
 
-const Note = ({ note }) => {
+const Archive = ({ note }) => {
   const {
     notes,
     starredNotes,
@@ -67,4 +67,4 @@ const Note = ({ note }) => {
   );
 };
 
-export default Note;
+export default Archive;
