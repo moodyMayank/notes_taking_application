@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,27 +10,22 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { DataContext } from "../../context/DataProvider";
 
 const StyledCard = styled(Card)`
-  width: 200px;
-  margin: 8px;
-  box-shadow: none;
+  width: 225px;
+  margin: 10px;
+  padding: 5px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
+  overflow-wrap: anywhere;
 `;
 
 const Note = ({ note }) => {
-  const {
-    notes,
-    starredNotes,
-    archiveNotes,
-    deletedNotes,
-    setNotes,
-    setStarredNotes,
-    setArchiveNotes,
-    setDeletedNotes,
-  } = useContext(DataContext);
+  const { notes, setNotes, setDeletedNotes, setStarredNotes } =
+    useContext(DataContext);
 
   const deleteNote = () => {
-    console.log("deleted");
+    const updatedNotes = notes.filter((data) => data.id !== note.id);
+    setNotes(updatedNotes);
+    setDeletedNotes((prevArr) => [note, ...prevArr]);
   };
 
   const starNote = (note) => {
@@ -39,14 +34,28 @@ const Note = ({ note }) => {
     setStarredNotes((prevArr) => [note, ...prevArr]);
   };
 
+  useEffect(() => {
+    console.log("Here");
+    // const notesItem = JSON.parse(localStorage.getItem("notesKey"));
+    // if (notesItem) setNotes(notesItem);
+    localStorage.setItem("notesKey", JSON.stringify(notes));
+  }, [notes]);
+
   const archiveNote = () => {};
   return (
     <StyledCard>
       <CardContent>
-        <Typography>{note ? note.heading : ""}</Typography>
-        <Typography>{note ? note.text : ""}</Typography>
+        <Typography
+          variant="h1"
+          style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "5px" }}
+        >
+          {note ? note.heading : ""}
+        </Typography>
+        <Typography style={{ minHeight: "50px" }}>
+          {note ? note.text : ""}
+        </Typography>
       </CardContent>
-      <CardActions style={{ cursor: "pointer" }}>
+      <CardActions sx={[{ cursor: "pointer" }]}>
         <StarBorderIcon
           color="success"
           fontSize="small"

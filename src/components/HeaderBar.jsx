@@ -8,16 +8,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const AppBar = styled(MuiAppBar)`
   z-index: 1201;
-  background-color: #0b2239;
+  background-color: white;
   height: 70px;
-  box-shadow: inset 0 -1px 0 0;
 `;
 
 const Heading = styled(Typography)`
-  font-family: "Bebas Neue", cursive;
+  font-family: "Source Code Pro";
   font-weight: 400;
   font-size: 38px;
   margin-left: 5px;
+  color: Black;
 `;
 
 const HeaderBar = ({ open, handleDrawer }) => {
@@ -30,6 +30,7 @@ const HeaderBar = ({ open, handleDrawer }) => {
           color="inherit"
           sx={{
             marginRight: "5px",
+            color: "black",
           }}
         >
           <MenuIcon />
@@ -39,7 +40,7 @@ const HeaderBar = ({ open, handleDrawer }) => {
           alt="logo"
           style={{ width: 40 }}
         />
-        <Heading>Note Taker</Heading>
+        <Heading>NoteTaker</Heading>
       </Toolbar>
     </AppBar>
   );

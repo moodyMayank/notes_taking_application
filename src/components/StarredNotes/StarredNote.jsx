@@ -18,19 +18,13 @@ const StyledCard = styled(Card)`
 `;
 
 const Note = ({ note }) => {
-  const {
-    notes,
-    starredNotes,
-    archiveNotes,
-    deletedNotes,
-    setNotes,
-    setStarredNotes,
-    setArchiveNotes,
-    setDeletedNotes,
-  } = useContext(DataContext);
+  const { notes, starNotes, setNotes, setStarredNotes, setDeletedNotes } =
+    useContext(DataContext);
 
   const deleteNote = () => {
-    console.log("deleted");
+    const updatedNotes = starNotes.filter((data) => data.id !== note.id);
+    setStarredNotes(updatedNotes);
+    setDeletedNotes((prevArr) => [note, ...prevArr]);
   };
 
   const starNote = (note) => {
@@ -59,7 +53,7 @@ const Note = ({ note }) => {
         />
         <DeleteOutlinedIcon
           fontSize="small"
-          onClick={() => deleteNote()}
+          onClick={() => deleteNote(note)}
           color="error"
         />
       </CardActions>

@@ -16,13 +16,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 // Using Key here to avoid the Warning in the React Code
 const StarredNotes = () => {
-  const { notes } = useContext(DataContext);
+  const { starNotes } = useContext(DataContext);
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
-      {notes.length > 0 ? (
+      {starNotes.length > 0 ? (
         <Grid container style={{ marginTop: "16px" }}>
-          {notes.map((note) => {
+          {starNotes.map((note) => {
             return (
               <Grid item key={note.id}>
                 <StarredNote note={note} />
@@ -32,8 +32,12 @@ const StarredNotes = () => {
         </Grid>
       ) : (
         <EmptyNotes
-          Image={<StarBorderOutlinedIcon />}
-          displayText={"Here we are"}
+          Image={
+            <StarBorderOutlinedIcon
+              style={{ fontSize: "120px", color: "#f5f5f5" }}
+            />
+          }
+          displayText={"Enjoy , No Important Notes"}
         />
       )}
     </Box>

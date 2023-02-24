@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
@@ -17,7 +17,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 // Using Key here to avoid the Warning in the React Code
 const Notes = () => {
-  const { notes } = useContext(DataContext);
+  const { notes, setNotes } = useContext(DataContext);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("notesKey"));
+    if (items) {
+      setNotes(items);
+    }
+  }, [setNotes]);
+
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
