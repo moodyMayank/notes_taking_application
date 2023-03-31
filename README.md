@@ -15,14 +15,11 @@ Note Taker application helps in taking notes. Notes can be starred , deleted and
 - Webpack Bundler 
 
 ## Features 
-\item Note-taker app where the user can \textbf{add, star, archive, delete} notes.
-\item Created \textbf{reusable} components and also made the notes draggable.
-\item Used local-Storage for saving the notes and Used Material UI for styling.
 
-- If the location permission is not allowed , then it does not shows weather.
-- First it shows current location weather and later we can search any location 
-- It shows city , country , temperature in Celsius and fahrenheit, humidity, visiblity, wind speed, Weather type.  
-- Interactive and Mobile Responsive UI built using Tailwind CSS.
+- Note-taker app where the user can add, star, archive, delete notes.
+- Created reusable components and also made the notes draggable.
+- Used local-Storage for saving the notes and Used Material UI for styling.
+
 
 ## Run Project Locally 
 
