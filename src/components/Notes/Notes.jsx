@@ -18,11 +18,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 // Using Key here to avoid the Warning in the React Code
 const Notes = () => {
   const { notes, setNotes } = useContext(DataContext);
+
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("notesKey"));
-    if (items) {
-      setNotes(items);
-    }
+    const items = JSON.parse(localStorage.getItem("noteskey"));
+    if (items) setNotes(items);
   }, [setNotes]);
 
   return (

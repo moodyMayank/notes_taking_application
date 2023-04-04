@@ -41,8 +41,10 @@ const Form = () => {
     containerRef.current.style.minHeight = "30px";
     setAddNote({ ...note, id: uuid() });
     // Pushing the Note to NotesList
-    if (addNote.heading || addNote.text)
-      setNotes((prevArr) => [addNote, ...prevArr]); // Push as a object
+    if (addNote.heading || addNote.text) {
+      setNotes((prevArr) => [addNote, ...prevArr]);
+      console.log("Here comes the code");
+    } // Push as a object
   };
 
   const onTextChange = (e) => {

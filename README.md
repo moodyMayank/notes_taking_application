@@ -12,3 +12,10 @@
 - Date Created / Modified
 - Delete Option
 - Coloring Option of the Note
+
+### Keys for Local Storage
+
+- notekey
+- starkey
+- archivekey
+- deletekey

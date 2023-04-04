@@ -19,29 +19,34 @@ const StyledCard = styled(Card)`
 `;
 
 const Note = ({ note }) => {
-  const { notes, setNotes, setDeletedNotes, setStarredNotes } =
+  const { notes, setNotes, setDeletedNotes, setStarredNotes, setArchiveNotes } =
     useContext(DataContext);
 
   const deleteNote = () => {
     const updatedNotes = notes.filter((data) => data.id !== note.id);
+    localStorage.setItem("noteskey", JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
     setDeletedNotes((prevArr) => [note, ...prevArr]);
   };
 
-  const starNote = (note) => {
+  const starNote = () => {
     const updatedNotes = notes.filter((data) => data.id !== note.id);
+    localStorage.setItem("noteskey", JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
     setStarredNotes((prevArr) => [note, ...prevArr]);
   };
 
+  const archiveNote = () => {
+    const updatedNotes = notes.filter((data) => data.id !== note.id);
+    localStorage.setItem("noteskey", JSON.stringify(updatedNotes));
+    setNotes(updatedNotes);
+    setArchiveNotes((prevArr) => [note, ...prevArr]);
+  };
+
   useEffect(() => {
-    console.log("Here");
-    // const notesItem = JSON.parse(localStorage.getItem("notesKey"));
-    // if (notesItem) setNotes(notesItem);
-    localStorage.setItem("notesKey", JSON.stringify(notes));
+    localStorage.setItem("noteskey", JSON.stringify(notes));
   }, [notes]);
 
-  const archiveNote = () => {};
   return (
     <StyledCard>
       <CardContent>
@@ -56,21 +61,13 @@ const Note = ({ note }) => {
         </Typography>
       </CardContent>
       <CardActions sx={[{ cursor: "pointer" }]}>
-        <StarBorderIcon
-          color="success"
-          fontSize="small"
-          onClick={() => starNote(note)}
-        />
+        <StarBorderIcon fontSize="small" onClick={() => starNote()} />
         <ArchiveOutlinedIcon
           fontSize="small"
           style={{ marginLeft: "auto" }}
-          onClick={() => archiveNote(note)}
+          onClick={() => archiveNote()}
         />
-        <DeleteOutlinedIcon
-          fontSize="small"
-          onClick={() => deleteNote()}
-          color="error"
-        />
+        <DeleteOutlinedIcon fontSize="small" onClick={() => deleteNote()} />
       </CardActions>
     </StyledCard>
   );

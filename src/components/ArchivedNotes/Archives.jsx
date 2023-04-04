@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Box, Grid, styled } from "@mui/material";
 
 // Components
@@ -17,7 +17,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 // Using Key here to avoid the Warning in the React Code
 const Archives = () => {
-  const { archiveNotes } = useContext(DataContext);
+  const { archiveNotes, setArchiveNotes } = useContext(DataContext);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("archiveNotesKey"));
+    if (items) setArchiveNotes(items);
+  }, [setArchiveNotes]);
+
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
@@ -38,7 +44,7 @@ const Archives = () => {
               style={{ fontSize: "120px", color: "#f5f5f5" }}
             />
           }
-          displayText={"Arhive Notes are here"}
+          displayText={"Archive Notes are here"}
         />
       )}
     </Box>
