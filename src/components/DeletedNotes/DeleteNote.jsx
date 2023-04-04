@@ -50,7 +50,7 @@ const Note = ({ note }) => {
 
   useEffect(() => {
     localStorage.setItem("deleteNotesKey", JSON.stringify(deletedNotes));
-  }, []);
+  }, [deletedNotes]);
 
   return (
     <StyledCard>
